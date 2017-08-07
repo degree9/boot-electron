@@ -31,12 +31,12 @@
          ednstr    {:require  [main]
                     :init-fns [init]
                     :compiler-options {:target :nodejs
-                                       :closure-defines {'electron-cljs.main/dev? dev}}}
+                                       :closure-defines {'electron-cljs.core/dev? dev}}}
          tmp       (boot/tmp-dir!)
          tmp-path  (.getAbsolutePath tmp)
          ednf      (io/file tmp (str edn ".cljs.edn"))]
-      (when dev
-        (boot/task-options! reload #(assoc-in % [:ws-host] "localhost")))
+     (when dev
+       (boot/task-options! reload #(assoc-in % [:ws-host] "localhost")))
      (comp
        (exec/properties :directory tmp-path :file "package.json" :contents propstr)
        (boot/with-pre-wrap fileset
